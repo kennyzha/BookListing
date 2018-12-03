@@ -1,5 +1,5 @@
-let booksByAuthor;
-let booksByTitle;
+let booksByAuthor = null;
+let booksByTitle = null;
 
 function getAndDisplayBooks(){
 	const query = document.getElementById('query').value;
@@ -25,8 +25,14 @@ function getAndDisplayBooks(){
 			console.error('Error:', error)
 			const errorSpan = document.getElementById('errorSpan');
 			errorSpan.innerHTML = "Please retry.";
+			setBooksToNull();
 		});
 
+}
+
+function setBooksToNull(){
+	booksByAuthor = null;
+	booksByTitle = null;
 }
 
 function createNode(element) {
@@ -62,7 +68,7 @@ function compareBookTitles(a, b){
  }
 
 function displayBooks(books, ul){
-	if(typeof books === "undefined"){
+	if(books === null){
 		return;
 	}
 
