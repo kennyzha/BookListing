@@ -90,6 +90,14 @@
 						append(ul, li);
 					})
 	  }
+
+	  function displayBooksByAuthor(){
+	  	displayBooks(booksByAuthor, document.getElementById('bookList'));
+	  }
+
+	  function displayBooksByTitle(){
+	  	displayBooks(booksByTitle, document.getElementById('bookList'));
+	  }
 	</script>
 	<title>Book Listing</title>
 	</head>
@@ -100,6 +108,8 @@
 		<input type="button" value="search" onclick="getAndDisplayBooks()"/>  
 	</form>  
 
+	<button onclick="displayBooksByAuthor()">Author</button>
+	<button onclick="displayBooksByTitle()">Title</button>
 
 	<span id="errorSpan"></span>
 	<ul id="bookList"></ul>
