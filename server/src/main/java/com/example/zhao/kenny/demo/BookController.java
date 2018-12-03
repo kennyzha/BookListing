@@ -4,6 +4,8 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -27,8 +29,11 @@ public class BookController {
 
     @CrossOrigin
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public List<Book> searchBooks(@RequestParam(value="q") String query){
-        List<Book> books = bookService.getBooks(query);
-        return books;
+    public ResponseEntity<List<Book>> searchBooks(@RequestParam(value="q") String query){
+        List<Book> bookResults = bookService.getBooks(query);
+        if(bookResults.isEmpty()){
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<List<Book>>(bookResults, HttpStatus.OK);
     }
 }
