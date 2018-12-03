@@ -19,14 +19,15 @@ import java.util.List;
 public class BookService {
     public final static Logger logger = Logger.getLogger(BookService.class);
     public static final String URL = "https://www.goodreads.com/search.xml?key=%s&q=%s";
-
+    public static final String API_KEY = Config.API_KEY;
+    
     public List<Book> getBooks(String query){
         List<Book> bookResults = new ArrayList<>();
         try {
             // Would use a SAX parser instead if XML file was larger
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             // Would cache the the results in a real application
-            Document doc = builder.parse(String.format(URL, Config.API_KEY, query));
+            Document doc = builder.parse(String.format(URL, API_KEY, query));
             doc.normalize();
 
             NodeList nodeList = doc.getElementsByTagName("best_book");

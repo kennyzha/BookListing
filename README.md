@@ -1,6 +1,7 @@
 
 ## Instructions ##
-1. Go to server directory and run BookList.java in demo package.
+1. Go to server directory and set API_KEY to your own goodreads api key.
+2. Run BookList.java in demo package.
 2. Open index.html in client directory.
 
 ![alt text](https://i.imgur.com/CCTkoVU.png)
