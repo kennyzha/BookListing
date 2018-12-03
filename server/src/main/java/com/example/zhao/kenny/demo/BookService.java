@@ -1,5 +1,6 @@
 package com.example.zhao.kenny.demo;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Service
 public class BookService {
+    public final static Logger logger = Logger.getLogger(BookService.class);
     public static final String URL = "https://www.goodreads.com/search.xml?key=%s&q=%s";
 
     public List<Book> getBooks(String query){
@@ -42,12 +44,8 @@ public class BookService {
                     bookResults.add(new Book(title, author, img_url));
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
+        } catch (IOException | ParserConfigurationException | SAXException ex) {
+            logger.error("Exception occurred when retrieving books from api and parsing it.", ex);
         }
 
         return bookResults;
